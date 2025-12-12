@@ -48,7 +48,6 @@ function isWall(i, j) {
 }
 
 async function calculate() {
-    // Nulstil
     for (let i = 0; i < rows; i++) {
         for (let j = 0; j < cols; j++) {
             if (!isWall(i, j)) {
@@ -60,12 +59,10 @@ async function calculate() {
         }
     }
     
-    // Start med E=1
     dp[rows - 1][cols - 1] = 1;
     cells[rows - 1][cols - 1].textContent = 'E=1';
     await sleep(100);
     
-    // Udfyld nederste række
     for (let j = cols - 2; j >= 0; j--) {
         if (!isWall(rows - 1, j)) {
             dp[rows - 1][j] = dp[rows - 1][j + 1];
@@ -74,7 +71,6 @@ async function calculate() {
         }
     }
     
-    // Udfyld højre kolonne
     for (let i = rows - 2; i >= 0; i--) {
         if (!isWall(i, cols - 1)) {
             dp[i][cols - 1] = dp[i + 1][cols - 1];
@@ -83,7 +79,6 @@ async function calculate() {
         }
     }
     
-    // Udfyld resten - bottom-up
     for (let i = rows - 2; i >= 0; i--) {
         for (let j = cols - 2; j >= 0; j--) {
             if (isWall(i, j)) continue;
